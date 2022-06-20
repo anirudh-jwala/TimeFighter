@@ -6,11 +6,13 @@ import android.os.CountDownTimer
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.google.android.material.snackbar.Snackbar
 
 // class MainActivity extends AppCompactActivity {}
 class MainActivity : AppCompatActivity() {
@@ -76,7 +78,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showInfo() {
-        val dialogTitle = getString(R.string.aboutTitle, BuildConfig.VERSION_CODE)
+        val dialogTitle = getString(R.string.aboutTitle)
         val dialogMessage = getString(R.string.aboutMessage)
 
         val builder = AlertDialog.Builder(this)
@@ -164,7 +166,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun endGame() {
-        Toast.makeText(this, getString(R.string.gameOverMessage, score), Toast.LENGTH_LONG).show()
+        val contextView = findViewById<View>(R.id.tfighterContainer)
+        Snackbar.make(contextView, getString(R.string.gameOverMessage, score), Snackbar.LENGTH_LONG)
+            .show()
+        // Toast.makeText(this, getString(R.string.gameOverMessage, score), Toast.LENGTH_LONG).show()
         resetGame()
     }
 
